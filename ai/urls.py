@@ -1,6 +1,3 @@
-
-
-
 """
 URL configuration for ai project.
 
@@ -22,5 +19,5 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('auth/', include('apps.authentication.urls'))
+    path('auth/', include('src.authentication.urls'))
 ]

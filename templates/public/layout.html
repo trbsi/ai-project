@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Public Page{% endblock %}</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+<!-- Header -->
+<header class="bg-gray-600 text-white shadow-md">
+    <div class="container mx-auto flex justify-between items-center p-4">
+        <h1 class="text-2xl font-bold">My Website</h1>
+        <nav class="space-x-4">
+            <a href="{% url 'login' %}" class="hover:underline">Login</a>
+            <!--            <a href="{% url 'register' %}" class="hover:underline">Register</a>-->
+            <!--            <a href="{% url 'about' %}" class="hover:underline">About</a>-->
+            <!--            <a href="{% url 'contact' %}" class="hover:underline">Contact</a>-->
+            <!--            <a href="{% url 'contact' %}" class="hover:underline">Privacy Policy</a>-->
+            <!--            <a href="{% url 'contact' %}" class="hover:underline">Terms of use</a>-->
+        </nav>
+    </div>
+</header>
+
+<!-- Main Content -->
+<main class="container mx-auto mt-10 p-6 bg-white rounded-lg shadow-md max-w-lg">
+    {% block content %}
+    <!-- Forms like login/registration go here -->
+    {% endblock %}
+</main>
+
+<!-- Footer -->
+<footer class="bg-gray-200 text-center py-4 mt-10">
+    &copy; {{ year }} My Website. All rights reserved.
+</footer>
+
+</body>
+</html>
