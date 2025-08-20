@@ -1,0 +1,59 @@
+{% extends "public/layout.html" %}
+
+{% block title %}Registration{% endblock %}
+
+{% block content %}
+<div class="w-full max-w-md bg-white rounded-xl shadow-lg p-8">
+    <h2 class="text-2xl font-bold text-center mb-6 text-gray-800">Create an Account</h2>
+    <form action="{% url 'do-register' %}" method="POST" class="space-y-5">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        <!-- Username -->
+        <div>
+            <label for="username" class="block text-sm font-medium text-gray-700">Username</label>
+            <input type="text" id="username" name="{{ form.username.name }}"
+                   class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                   placeholder="Enter your username" required>
+            {{ form.username.errors }}
+        </div>
+
+        <!-- Email -->
+        <div>
+            <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+            <input type="email" id="email" name="{{ form.email.name }}"
+                   class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                   placeholder="you@example.com" required>
+            {{ form.email.errors }}
+        </div>
+
+        <!-- Password -->
+        <div>
+            <label for="password1" class="block text-sm font-medium text-gray-700">Password</label>
+            <input type="password" id="password1" name="{{ form.password1.name }}"
+                   class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                   placeholder="********" required>
+            {{ form.password1.errors }}
+        </div>
+
+        <div>
+            <label for="password2" class="block text-sm font-medium text-gray-700">Password</label>
+            <input type="password" id="password2" name="{{ form.password2.name }}"
+                   class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                   placeholder="********" required>
+            {{ form.password2.errors }}
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit"
+                class="w-full bg-blue-600 text-white py-2 rounded-lg font-semibold hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+            Register
+        </button>
+
+        <!-- Login Link -->
+        <p class="text-sm text-center text-gray-600 mt-4">
+            Already have an account?
+            <a href="{% url 'login' %}" class="text-blue-600 hover:underline">Login</a>
+        </p>
+    </form>
+</div>
+{% endblock %}

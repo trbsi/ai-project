@@ -14,7 +14,7 @@
         <h1 class="text-2xl font-bold">My Website</h1>
         <nav class="space-x-4">
             <a href="{% url 'login' %}" class="hover:underline">Login</a>
-            <!--            <a href="% url 'register' %" class="hover:underline">Register</a>-->
+            <a href="{% url 'register' %}" class="hover:underline">Register</a>
             <!--            <a href="% url 'about' %" class="hover:underline">About</a>-->
             <!--            <a href="% url 'contact' %" class="hover:underline">Contact</a>-->
             <!--            <a href="% url 'contact' %" class="hover:underline">Privacy Policy</a>-->
@@ -25,6 +25,20 @@
 
 <!-- Main Content -->
 <main class="container mx-auto mt-10 p-6 bg-white rounded-lg shadow-md max-w-lg">
+    {% if messages %}
+    <div class="space-y-2">
+        {% for message in messages %}
+        <div class="p-4 rounded
+         {% if message.tags == 'success' %} bg-green-100 text-green-800
+         {% elif message.tags == 'error' %} bg-red-100 text-red-800
+         {% elif message.tags == 'warning' %} bg-yellow-100 text-yellow-800
+         {% endif %}
+        ">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
     {% block content %}
     <!-- Forms like login/registration go here -->
     {% endblock %}
