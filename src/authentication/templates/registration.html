@@ -3,7 +3,7 @@
 {% block title %}Registration{% endblock %}
 
 {% block content %}
-<div class="w-full max-w-md bg-white rounded-xl shadow-lg p-8">
+<div>
     <h2 class="text-2xl font-bold text-center mb-6 text-gray-800">Create an Account</h2>
     <form action="{% url 'do-register' %}" method="POST" class="space-y-5">
         {% csrf_token %}

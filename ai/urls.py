@@ -17,9 +17,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+from src.authentication.forms.custom_password_change_view import CustomPasswordChangeView
+
 urlpatterns = [
+    path('', include('src.core.urls')),
     path('admin/', admin.site.urls),
+    path('user/', include('src.user.urls')),
+    path('auth/password_change/', CustomPasswordChangeView.as_view(), name='password-change'),
     path('auth/', include('django.contrib.auth.urls')),
     path('authentication/', include('src.authentication.urls')),
-    path('', include('src.core.urls')),
 ]
