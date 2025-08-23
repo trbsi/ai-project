@@ -3,67 +3,55 @@
 {% block title %}Login{% endblock %}
 
 {% block content %}
-<h2 class="text-xl font-semibold mb-4">Login</h2>
-<form method="post" class="space-y-4">
-    {% csrf_token %}
-    {{ form.non_field_errors }}
-
-    <form method="post" action="{% url 'login' %}" novalidate>
-        {% csrf_token %}
-
-        <!-- Username -->
-        <div class="mb-4">
-            <label for="{{ form.username.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">
-                {{ form.username.label }}
-            </label>
-            <input
-                    type="text"
-                    name="{{ form.username.name }}"
-                    id="{{ form.username.id_for_label }}"
-                    placeholder="Enter your username"
-                    class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
-            />
-            {% if form.username.errors %}
-            <p class="text-red-600 text-sm mt-1">{{ form.username.errors.0 }}</p>
-            {% endif %}
+<div class="container">
+    <div class="flex flex-wrap -mx-3 -mt-48 md:-mt-56 lg:-mt-48">
+        <div
+                class="w-full max-w-full px-3 mx-auto mt-0 md:flex-0 shrink-0 md:w-7/12 lg:w-5/12 xl:w-4/12">
+            <div
+                    class="relative z-0 flex flex-col min-w-0 break-words bg-white border-0 shadow-soft-xl rounded-2xl bg-clip-border">
+                <div class="flex-auto p-6">
+                    <form method="POST" action="{% url 'login' %}" role="form text-left">
+                        {% csrf_token %}
+                        {{ form.non_field_errors }}
+                        <div class="mb-4">
+                            <input
+                                    name="{{form.username.name}}"
+                                    type="text"
+                                    class="text-sm focus:shadow-soft-primary-outline leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding py-2 px-3 font-normal text-gray-700 transition-all focus:border-fuchsia-300 focus:bg-white focus:text-gray-700 focus:outline-none focus:transition-shadow"
+                                    placeholder="Username"
+                                    aria-label="Name"
+                                    aria-describedby="email-addon"/>
+                            {{ form.username.errors }}
+                        </div>
+                        <div class="mb-4">
+                            <input
+                                    name="{{form.password.name}}"
+                                    type="password"
+                                    class="text-sm focus:shadow-soft-primary-outline leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding py-2 px-3 font-normal text-gray-700 transition-all focus:border-fuchsia-300 focus:bg-white focus:text-gray-700 focus:outline-none focus:transition-shadow"
+                                    placeholder="Password"
+                                    aria-label="Password"
+                                    aria-describedby="password-addon"/>
+                            {{ form.password.errors }}
+                        </div>
+                        <div class="text-center">
+                            <button
+                                    type="submit"
+                                    class="inline-block w-full px-6 py-3 mt-6 mb-2 font-bold text-center text-white uppercase align-middle transition-all bg-transparent border-0 rounded-lg cursor-pointer active:opacity-85 hover:scale-102 hover:shadow-soft-xs leading-pro text-xs ease-soft-in tracking-tight-soft shadow-soft-md bg-150 bg-x-25 bg-gradient-to-tl from-gray-900 to-slate-800 hover:border-slate-700 hover:bg-slate-700 hover:text-white">
+                                Login
+                            </button>
+                        </div>
+                        <p class="mt-4 mb-0 leading-normal text-sm">
+                            Already have an account?
+                            <a href="{% url 'login' %}" class="font-bold text-slate-700">Sign in</a>
+                        </p>
+                        <p class="mt-4 mb-0 leading-normal text-sm">
+                            <a href="{% url 'password_reset' %}" class="font-bold text-slate-700">Forgot password?</a>
+                        </p>
+                    </form>
+                </div>
+            </div>
         </div>
-
-        <!-- Password -->
-        <div class="mb-4">
-            <label for="{{ form.password.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">
-                {{ form.password.label }}
-            </label>
-            <input
-                    type="password"
-                    name="{{ form.password.name }}"
-                    id="{{ form.password.id_for_label }}"
-                    placeholder="Enter your password"
-                    class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
-            />
-            {% if form.password.errors %}
-            <p class="text-red-600 text-sm mt-1">{{ form.password.errors.0 }}</p>
-            {% endif %}
-        </div>
-
-        <!-- Remember Me -->
-        <div class="mb-4 flex items-center">
-            <input type="checkbox" name="remember_me" id="remember_me" checked
-                   class="mr-2 h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
-            <label for="remember_me" class="text-sm text-gray-700">Remember Me</label>
-        </div>
-
-        <!-- Submit Button -->
-        <button type="submit"
-                class="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md transition-colors">
-            Login
-        </button>
-
-        <!-- Optional Links -->
-        <div class="mt-4 text-sm text-center">
-            <a href="{% url 'password_reset' %}" class="text-blue-500 hover:underline">Forgot password?</a>
-        </div>
-    </form>
-</form>
-
+    </div>
+</div>
 
 {% endblock %}

@@ -12,4 +12,6 @@
 
 # Layouts
 
-https://preline.co/examples/layouts-basic.html
+Used - https://themewagon.com/themes/softui-tailwind/
+
+Other - https://themewagon.com/theme-framework/tailwind-css/?swoof=1&pa_price=free&paged=1&orderby=relevance&really_curr_tax=400-pa_frameworks

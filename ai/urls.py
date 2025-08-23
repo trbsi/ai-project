@@ -18,12 +18,21 @@ from django.contrib import admin
 from django.urls import path, include
 
 from src.authentication.forms.custom_password_change_view import CustomPasswordChangeView
+from src.authentication.forms.custom_password_reset_view import CustomPasswordResetView
 
 urlpatterns = [
+    # core
     path('', include('src.core.urls')),
+
+    # admin
     path('admin/', admin.site.urls),
+
+    # user
     path('user/', include('src.user.urls')),
-    path('auth/password_change/', CustomPasswordChangeView.as_view(), name='password-change'),
+
+    # auth
+    path('auth/password_change/', CustomPasswordChangeView.as_view(), name='password_change'),
+    path('auth/password_reset/', CustomPasswordResetView.as_view(), name='password-reset'),
     path('auth/', include('django.contrib.auth.urls')),
     path('authentication/', include('src.authentication.urls')),
 ]

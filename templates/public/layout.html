@@ -1,53 +1,213 @@
+{% load static %}
+<!--
+=========================================================
+* Soft UI Dashboard Tailwind - v1.0.5
+=========================================================
+
+* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-tailwind
+* Copyright 2023 Creative Tim (https://www.creative-tim.com)
+* Licensed under MIT (https://www.creative-tim.com/license)
+* Coded by Creative Tim
+
+=========================================================
+
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Public Page{% endblock %}</title>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link
+            rel="apple-touch-icon"
+            sizes="76x76"
+            href="{% static 'assets/img/apple-icon.png' %}"/>
+    <link rel="icon" type="image/png" href="{% static 'assets/img/favicon.png' %}"/>
+    <title>{% block title %}Soft UI Dashboard Tailwind{% endblock %}</title>
+    <!-- Fonts and icons -->
+    <link
+            href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700"
+            rel="stylesheet"/>
+    <!-- Font Awesome Icons -->
+    <script
+            src="https://kit.fontawesome.com/42d5adcbca.js"
+            crossorigin="anonymous"></script>
+    <!-- Nucleo Icons -->
+    <link href="{% static 'assets/css/nucleo-icons.css' %}" rel="stylesheet"/>
+    <link href="{% static 'assets/css/nucleo-svg.css' %}" rel="stylesheet"/>
+    <!-- Main Styling -->
+    <link
+            href="{% static 'assets/css/soft-ui-dashboard-tailwind.css' %}"
+            rel="stylesheet"/>
+<!--    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>-->
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 </head>
-<body class="bg-gray-100 text-gray-800">
 
-<!-- Header -->
-<header class="bg-gray-600 text-white shadow-md">
-    <div class="container mx-auto flex justify-between items-center p-4">
-        <h1 class="text-2xl font-bold">My Website</h1>
-        <nav class="space-x-4">
-            <a href="{% url 'login' %}" class="hover:underline">Login</a>
-            <a href="{% url 'register' %}" class="hover:underline">Register</a>
-            <!--            <a href="% url 'about' %" class="hover:underline">About</a>-->
-            <!--            <a href="% url 'contact' %" class="hover:underline">Contact</a>-->
-            <!--            <a href="% url 'contact' %" class="hover:underline">Privacy Policy</a>-->
-            <!--            <a href="% url 'contact' %" class="hover:underline">Terms of use</a>-->
-        </nav>
-    </div>
-</header>
-
-<!-- Main Content -->
-<main class="container mx-auto mt-10 p-6 bg-white rounded-lg shadow-md max-w-lg">
-    {% if messages %}
-    <div class="space-y-2">
-        {% for message in messages %}
-        <div class="p-4 rounded
-         {% if message.tags == 'success' %} bg-green-100 text-green-800
-         {% elif message.tags == 'error' %} bg-red-100 text-red-800
-         {% elif message.tags == 'warning' %} bg-yellow-100 text-yellow-800
-         {% endif %}
-        ">
-            {{ message }}
+<body
+        class="m-0 font-sans antialiased font-normal bg-white text-start text-base leading-default text-slate-500">
+<!-- Navbar -->
+<nav
+        class="absolute top-0 z-30 flex flex-wrap items-center justify-between w-full px-4 py-2 mt-6 mb-4 shadow-none lg:flex-nowrap lg:justify-start">
+    <div
+            class="container flex items-center justify-between py-0 flex-wrap-inherit">
+        <div
+                navbar-menu
+                class="items-center flex-grow transition-all ease-soft duration-350 lg-max:bg-white lg-max:max-h-0 lg-max:overflow-hidden basis-full rounded-xl lg:flex lg:basis-auto">
+            <ul
+                    class="flex flex-col pl-0 mx-auto mb-0 list-none lg:flex-row xl:ml-auto">
+                <li>
+                    <a
+                            class="block px-4 py-2 mr-2 font-normal text-white transition-all duration-250 lg-max:opacity-0 lg-max:text-slate-700 ease-soft-in-out text-sm lg:px-2 lg:hover:text-white/75"
+                            href="{% url 'register' %}">
+                        <i
+                                class="mr-1 text-white lg-max:text-slate-700 fas fa-user-circle opacity-60"></i>
+                        Sign Up
+                    </a>
+                </li>
+                <li>
+                    <a
+                            class="block px-4 py-2 mr-2 font-normal text-white transition-all duration-250 lg-max:opacity-0 lg-max:text-slate-700 ease-soft-in-out text-sm lg:px-2 lg:hover:text-white/75"
+                            href="{% url 'login' %}">
+                        <i
+                                class="mr-1 text-white lg-max:text-slate-700 fas fa-key opacity-60"></i>
+                        Sign In
+                    </a>
+                </li>
+            </ul>
+            <!-- online builder btn  -->
+            <!-- <li class="flex items-center">
+              <a
+                class="leading-pro ease-soft-in border-white/75 text-xs tracking-tight-soft rounded-3.5xl hover:border-white/75 hover:scale-102 active:hover:border-white/75 active:hover:scale-102 active:opacity-85 active:shadow-soft-xs active:border-white/75 bg-white/10 hover:bg-white/10 active:hover:bg-white/10 mr-2 mb-0 inline-block cursor-pointer border border-solid py-2 px-8 text-center align-middle font-bold uppercase text-white shadow-none transition-all hover:text-white hover:opacity-75 hover:shadow-none active:scale-100 active:bg-white active:text-black active:hover:text-white active:hover:opacity-75 active:hover:shadow-none"
+                target="_blank"
+                href="https://www.creative-tim.com/builder/soft-ui?ref=navbar-dashboard&amp;_ga=2.76518741.1192788655.1647724933-1242940210.1644448053"
+                >Online Builder</a
+              >
+            </li> -->
         </div>
-        {% endfor %}
     </div>
-    {% endif %}
-    {% block content %}
-    <!-- Forms like login/registration go here -->
-    {% endblock %}
+</nav>
+
+<main class="mt-0 transition-all duration-200 ease-soft-in-out">
+    <section class="min-h-screen mb-32">
+        <div
+                class="relative flex items-start pt-12 pb-56 m-4 overflow-hidden bg-center bg-cover min-h-50-screen rounded-xl"
+                style="
+            background-image: url('{% static 'assets/img/curved-images/curved14.jpg' %}');
+          ">
+          <span
+                  class="absolute top-0 left-0 w-full h-full bg-center bg-cover bg-gradient-to-tl from-gray-900 to-slate-800 opacity-60"></span>
+            <div class="container z-10">
+                <div class="flex flex-wrap justify-center -mx-3">
+                    <div
+                            class="w-full max-w-full px-3 mx-auto mt-0 text-center lg:flex-0 shrink-0 lg:w-5/12">
+                        <h1 class="mt-12 mb-2 text-white">{% block header_title %}Welcome!{% endblock %}</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% block content %}{% endblock %}
+    </section>
+
+    <!-- -------- START FOOTER 3 w/ COMPANY DESCRIPTION WITH LINKS & SOCIAL ICONS & COPYRIGHT ------- -->
+    <footer class="py-12">
+        <div class="container">
+            <div class="flex flex-wrap -mx-3">
+                <div
+                        class="flex-shrink-0 w-full max-w-full mx-auto mb-6 text-center lg:flex-0 lg:w-8/12">
+                    <a
+                            href="javascript:;"
+                            target="_blank"
+                            class="mb-2 mr-4 text-slate-400 sm:mb-0 xl:mr-12">
+                        About Us
+                    </a>
+                    <a
+                            href="javascript:;"
+                            target="_blank"
+                            class="mb-2 mr-4 text-slate-400 sm:mb-0 xl:mr-12">
+                        Privacy Policy
+                    </a>
+                    <a
+                            href="javascript:;"
+                            target="_blank"
+                            class="mb-2 mr-4 text-slate-400 sm:mb-0 xl:mr-12">
+                        Terms Of Use
+                    </a>
+                </div>
+                <div
+                        class="flex-shrink-0 w-full max-w-full mx-auto mt-2 mb-6 text-center lg:flex-0 lg:w-8/12">
+                    <a
+                            href="javascript:;"
+                            target="_blank"
+                            class="mr-6 text-slate-400">
+                        <span class="text-lg fab fa-dribbble"></span>
+                    </a>
+                    <a
+                            href="javascript:;"
+                            target="_blank"
+                            class="mr-6 text-slate-400">
+                        <span class="text-lg fab fa-twitter"></span>
+                    </a>
+                    <a
+                            href="javascript:;"
+                            target="_blank"
+                            class="mr-6 text-slate-400">
+                        <span class="text-lg fab fa-instagram"></span>
+                    </a>
+                    <a
+                            href="javascript:;"
+                            target="_blank"
+                            class="mr-6 text-slate-400">
+                        <span class="text-lg fab fa-pinterest"></span>
+                    </a>
+                    <a
+                            href="javascript:;"
+                            target="_blank"
+                            class="mr-6 text-slate-400">
+                        <span class="text-lg fab fa-github"></span>
+                    </a>
+                </div>
+            </div>
+            <div class="flex flex-wrap -mx-3">
+                <div class="w-8/12 max-w-full px-3 mx-auto mt-1 text-center flex-0">
+                    <p class="mb-0 text-slate-400">
+                        Copyright ©
+                        <script>
+                            document.write(new Date().getFullYear());
+                        </script>
+                        Soft by Creative Tim.
+                        <span class="w-full"> Distributed by ❤️ ThemeWagon </span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- -------- END FOOTER 3 w/ COMPANY DESCRIPTION WITH LINKS & SOCIAL ICONS & COPYRIGHT ------- -->
 </main>
-
-<!-- Footer -->
-<footer class="bg-gray-200 text-center py-4 mt-10">
-    &copy; {{ year }} My Website. All rights reserved.
-</footer>
-
 </body>
+<!-- plugin for scrollbar  -->
+<script src="{% static 'assets/js/plugins/perfect-scrollbar.min.js' %}" async></script>
+<!-- main script file  -->
+<script
+        src="{% static 'assets/js/soft-ui-dashboard-tailwind.js' %}"
+        async></script>
+
+<script>
+    toastr.options.progressBar = true;
+    toastr.options.closeDuration = 5000;
+    {% if messages %}
+    {% for message in messages %}
+        {% if message.tags == 'success' %}  toastr.success('{{message}}')
+        {% elif message.tags == 'warning' %}  toastr.warning('{{message}}')
+        {% elif message.tags == 'error' %}  toastr.error('{{message}}')
+        {% elif message.tags == 'info' %}  toastr.info('{{message}}')
+        {% endif %}
+    {% endfor %}
+    {% endif %}
+
+</script>
 </html>
