@@ -15,3 +15,25 @@
 Used - https://themewagon.com/themes/softui-tailwind/
 
 Other - https://themewagon.com/theme-framework/tailwind-css/?swoof=1&pa_price=free&paged=1&orderby=relevance&really_curr_tax=400-pa_frameworks
+
+# Chat GPT
+
+https://platform.openai.com/docs/overview
+
+Sample code
+
+```
+from openai import OpenAI
+
+client = OpenAI(
+api_key="my_key"
+)
+
+response = client.responses.create(
+model="gpt-4o-mini",
+input="write a haiku about ai",
+store=True,
+)
+
+print(response.output_text);
+```

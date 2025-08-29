@@ -1,0 +1,63 @@
+<div
+        class="items-center block w-auto max-h-screen overflow-auto h-sidenav grow basis-full">
+    <ul class="flex flex-col pl-0 mb-0">
+        <li class="mt-0.5 w-full">
+            <a
+                    class="{% if request.resolver_match.url_name == 'my_subscriptions' %} shadow-soft-xl bg-white {% endif %} py-2.7 text-sm ease-nav-brand my-0 mx-4 flex items-center whitespace-nowrap px-4 transition-colors"
+                    href="{% url 'my_subscriptions' %}">
+                <div
+                        class="shadow-soft-2xl mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-white bg-center stroke-0 text-center xl:p-2.5">
+                    <i class="fa-solid fa-money-bill-1"></i>
+                </div>
+                <span class="ml-1 duration-300 opacity-100 pointer-events-none ease-soft">My Subscriptions</span>
+            </a>
+        </li>
+
+        <li class="mt-0.5 w-full">
+            <a
+                    class="{% if request.resolver_match.url_name == 'gpt_tool' %} shadow-soft-xl bg-white {% endif %}py-2.7 text-sm ease-nav-brand my-0 mx-4 flex items-center whitespace-nowrap px-4 transition-colors"
+                    href="{% url 'gpt_tool' %}">
+                <div
+                        class="shadow-soft-2xl mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-white bg-center stroke-0 text-center xl:p-2.5">
+                    <i class="fa-solid fa-screwdriver-wrench"></i>
+                </div>
+                <span class="ml-1 duration-300 opacity-100 pointer-events-none ease-soft">GPT</span>
+            </a>
+        </li>
+
+        <li class="w-full mt-4">
+            <h6
+                    class="pl-6 ml-2 text-xs font-bold leading-tight uppercase opacity-60">
+                Account pages
+            </h6>
+        </li>
+
+        <li class="mt-0.5 w-full">
+            <a
+                    class="{% if request.resolver_match.url_name == 'password_change' %} shadow-soft-xl bg-white {% endif %} py-2.7 text-sm ease-nav-brand my-0 mx-4 flex items-center whitespace-nowrap px-4 transition-colors"
+                    href="{% url 'password_change' %}">
+                <div
+                        class="shadow-soft-2xl mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-white bg-center stroke-0 text-center xl:p-2.5">
+                    <i class="fa-solid fa-key"></i>
+                </div>
+                <span
+                        class="ml-1 duration-300 opacity-100 pointer-events-none ease-soft">Reset password</span>
+            </a>
+        </li>
+
+        <li class="mt-0.5 w-full">
+            <form method="post" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <button
+                        class="py-2.7 text-sm ease-nav-brand my-0 mx-4 flex items-center whitespace-nowrap px-4 transition-colors">
+                    <div
+                            class="shadow-soft-2xl mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-white bg-center stroke-0 text-center xl:p-2.5">
+                        <i class="fa-solid fa-right-from-bracket"></i>
+                    </div>
+                    <span class="ml-1 duration-300 opacity-100 pointer-events-none ease-soft">Logout</span>
+                </button>
+            </form>
+        </li>
+
+    </ul>
+</div>

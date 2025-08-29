@@ -17,6 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+from src.authentication.forms.custom_login_view import CustomLoginView
 from src.authentication.forms.custom_password_change_view import CustomPasswordChangeView
 from src.authentication.forms.custom_password_reset_view import CustomPasswordResetView
 
@@ -31,8 +32,15 @@ urlpatterns = [
     path('user/', include('src.user.urls')),
 
     # auth
+    path('auth/login/', CustomLoginView.as_view(), name='login'),
     path('auth/password_change/', CustomPasswordChangeView.as_view(), name='password_change'),
     path('auth/password_reset/', CustomPasswordResetView.as_view(), name='password-reset'),
     path('auth/', include('django.contrib.auth.urls')),
     path('authentication/', include('src.authentication.urls')),
+
+    # payment
+    path('payment/', include('src.payment.urls')),
+
+    # ai tool
+    path('ai/', include('src.ai_tool.urls')),
 ]

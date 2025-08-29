@@ -45,6 +45,8 @@ INSTALLED_APPS = [
     'src.authentication.apps.AuthenticationConfig',
     'src.core.apps.CoreConfig',
     'src.user.apps.UserConfig',
+    'src.payment.apps.PaymentConfig',
+    'src.ai_tool.apps.AiToolConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -61,6 +63,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'ai.middlewares.subscription_middleware.SubscriptionMiddleware',
 ]
 
 ROOT_URLCONF = 'ai.urls'
@@ -161,5 +164,9 @@ else:
     EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
     DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL')
 
-LOGIN_REDIRECT_URL='/'
-LOGOUT_REDIRECT_URL='/'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
+SESSION_COOKIE_AGE = 30 * 86400
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False
+
+DOMAIN = env('DOMAIN')

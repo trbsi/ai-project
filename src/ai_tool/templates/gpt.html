@@ -1,0 +1,98 @@
+{% extends "private/layout.html" %}
+{% block title %} GPT {% endblock %}
+
+{% block content %}
+<div class="w-full bg-white shadow-lg rounded-lg flex flex-col overflow-hidden">
+    <!-- Chat header -->
+    <div class="bg-blue-500 text-white px-4 py-2 font-bold">
+        Chat with Bot
+    </div>
+
+    <!-- Chat messages -->
+    <div id="chatMessages" class="flex-1 p-4 overflow-y-auto space-y-2">
+        <!-- Messages will appear here -->
+    </div>
+
+    <!-- Input area -->
+    <div class="flex border-t border-gray-200">
+        <input id="userInput" type="text" placeholder="Type your message..."
+               class="flex-1 p-2 outline-none">
+        <button id="sendBtn" class="bg-blue-500 text-white px-4">Send</button>
+    </div>
+</div>
+{% endblock %}
+
+{% block javascript %}
+<script>
+    var lastMessageId = 0;
+    // Function to append a message
+    function appendMessage(sender, text) {
+        const messageClass = sender === 'bot' ? 'bg-gray-200 text-black self-start' : 'bg-blue-500 text-white self-end';
+        const messageDiv = $('<div>').addClass('px-4 py-2 rounded-lg ' + messageClass).text(text);
+        $('#chatMessages').append(messageDiv);
+        $('#chatMessages').scrollTop($('#chatMessages')[0].scrollHeight);
+    }
+
+    // Send message to API
+    function sendMessage(message) {
+        appendMessage('user', message);
+
+        $.ajax({
+            url: '/send-message', // replace with your API endpoint
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({ message: message }),
+            success: function(response) {
+                // You can either get immediate response or poll
+                // For demonstration, we append the bot response directly
+                if (response.reply) {
+                    appendMessage('bot', response.reply);
+                }
+            },
+            error: function() {
+                appendMessage('bot', 'Error: could not send message.');
+            }
+        });
+    }
+
+    // Poll API for bot responses (optional)
+    function pollBotResponses() {
+        $.ajax({
+            url: '/poll-bot', // replace with your polling endpoint
+            type: 'GET',
+            data: {
+                lastId: lastMessageId
+            },
+            success: function(response) {
+                if (response.new_messages && response.new_messages.length > 0) {
+                    response.new_messages.forEach(msg => {
+                        appendMessage('bot', msg);
+                    });
+                }
+                lastMessageId = response.lastMessageId;
+            },
+        });
+    }
+
+    $(document).ready(function() {
+        // Send button click
+        $('#sendBtn').click(function() {
+            const message = $('#userInput').val().trim();
+            if (message) {
+                sendMessage(message);
+                $('#userInput').val('');
+            }
+        });
+
+        // Enter key to send
+        $('#userInput').keypress(function(e) {
+            if (e.which === 13) {
+                $('#sendBtn').click();
+            }
+        });
+
+        // Start polling for bot responses
+         setInterval(pollBotResponses, 2000);
+    });
+</script>
+{% endblock %}

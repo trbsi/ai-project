@@ -8,6 +8,8 @@ from src.authentication.forms.custom_user_creation_form import CustomUserCreatio
 
 @require_GET
 def registrationForm(request: HttpRequest) -> HttpResponse:
+    if request.user.is_authenticated:
+        return redirect('home')
     form = CustomUserCreationForm()
     return render(request, 'registration.html', {'form': form})
 
