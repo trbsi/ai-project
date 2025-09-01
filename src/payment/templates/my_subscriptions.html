@@ -39,9 +39,14 @@
                 </li>
             </ul>
             <div class="mt-6">
-                <button class="w-full rounded-xl bg-black px-4 py-2 text-sm font-semibold text-white hover:bg-slate-800">
-                    Subscribe
-                </button>
+                <form method="POST" action="{% url 'subscribe' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="package" value="starter">
+                    <button type="submit"
+                            class="w-full rounded-xl bg-black px-4 py-2 text-sm font-semibold text-white hover:bg-slate-800">
+                        Subscribe
+                    </button>
+                </form>
             </div>
         </article>
 
@@ -66,9 +71,14 @@
                 </li>
             </ul>
             <div class="mt-6">
-                <button class="w-full rounded-xl bg-black px-4 py-2 text-sm font-semibold text-white hover:bg-indigo-700">
-                    Subscribe
-                </button>
+                <form method="POST" action="{% url 'subscribe' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="package" value="pro">
+                    <button type="submit"
+                            class="w-full rounded-xl bg-black px-4 py-2 text-sm font-semibold text-white hover:bg-slate-800">
+                        Subscribe
+                    </button>
+                </form>
             </div>
         </article>
 

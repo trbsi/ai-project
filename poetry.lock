@@ -717,7 +717,22 @@ h2 = ["h2 (>=4,<5)"]
 socks = ["pysocks (>=1.5.6,!=1.5.7,<2.0)"]
 zstd = ["zstandard (>=0.18.0)"]
 
+[[package]]
+name = "wonderwords"
+version = "2.2.0"
+description = "A python package for random words and sentences in the english language"
+optional = false
+python-versions = ">=3.6"
+groups = ["main"]
+files = [
+    {file = "wonderwords-2.2.0-py3-none-any.whl", hash = "sha256:65fc665f1f5590e98f6d9259414ea036bf1b6dd83e51aa6ba44473c99ca92da1"},
+    {file = "wonderwords-2.2.0.tar.gz", hash = "sha256:0b7ec6f591062afc55603bfea71463afbab06794b3064d9f7b04d0ce251a13d0"},
+]
+
+[package.extras]
+cli = ["rich (==9.10.0)"]
+
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.12,<4"
-content-hash = "baf948756db153cb47a66fddb84926e74a725bbdf965a20a6b9c8065447252ad"
+content-hash = "f2d5f8d39311306a111b3828cac32027d467d1ffe266fb176265479a2114ac4c"

@@ -20,17 +20,19 @@ def my_subscriptions(request: HttpRequest) -> HttpResponse:
 
 @require_POST
 @login_required
-def subscribe(request: HttpRequest, subscribe_service: SubscribeService):
+def subscribe(request: HttpRequest):
     user: User = request.user
     package: str = request.POST.get('package')
+    subscribe_service: SubscribeService = SubscribeService()
     url: str = subscribe_service.subscribe(user, package)
     return redirect(url)
 
 
 @require_GET
 @login_required
-def payment_success(request: HttpRequest, subscribe_service: SubscribeService) -> HttpResponse:
+def payment_success(request: HttpRequest) -> HttpResponse:
     user: User = request.user
+    subscribe_service: SubscribeService = SubscribeService()
     subscribe_service.activate_subscription(user)
 
     url = reverse_lazy('redirect_to')

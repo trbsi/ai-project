@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from django.http import HttpRequest, HttpResponse
+from django.shortcuts import redirect
 from django.urls import resolve, reverse_lazy
 from django.utils.http import urlencode
 
@@ -20,6 +21,6 @@ class SubscriptionMiddleware:
             if user_subscription is None or user_subscription.is_active() == False:
                 url = reverse_lazy('redirect_to')
                 query = urlencode({'type': 'forbidden_by_subscription'})
-                # return redirect(f"{url}?{query}")
+                return redirect(f"{url}?{query}")
 
         return self.get_response(request)

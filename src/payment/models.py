@@ -19,7 +19,7 @@ class Subscription(models.Model):
         return self.updated_at
 
     def is_active(self) -> bool:
-        return self.active_until is not None and self.active_until > datetime.datetime.now()
+        return self.active_until is not None and self.active_until.timestamp() > datetime.datetime.now().timestamp()
 
 
 class Package(models.Model):

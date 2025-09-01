@@ -17,7 +17,7 @@
     <div class="flex border-t border-gray-200">
         <input id="userInput" type="text" placeholder="Type your message..."
                class="flex-1 p-2 outline-none">
-        <button id="sendBtn" class="bg-blue-500 text-white px-4">Send</button>
+        <button id="sendBtn" class="bg-blue-500 text-black px-4">Send</button>
     </div>
 </div>
 {% endblock %}
@@ -38,10 +38,13 @@
         appendMessage('user', message);
 
         $.ajax({
-            url: '/send-message', // replace with your API endpoint
+            url: '/ai/send-message', // replace with your API endpoint
             type: 'POST',
             contentType: 'application/json',
             data: JSON.stringify({ message: message }),
+            headers: {
+                "X-CSRFToken": document.querySelector('meta[name="csrf-token"]').getAttribute("content")
+            },
             success: function(response) {
                 // You can either get immediate response or poll
                 // For demonstration, we append the bot response directly
@@ -58,14 +61,14 @@
     // Poll API for bot responses (optional)
     function pollBotResponses() {
         $.ajax({
-            url: '/poll-bot', // replace with your polling endpoint
+            url: '/ai/poll-bot', // replace with your polling endpoint
             type: 'GET',
             data: {
                 lastId: lastMessageId
             },
             success: function(response) {
-                if (response.new_messages && response.new_messages.length > 0) {
-                    response.new_messages.forEach(msg => {
+                if (response.newMessages && response.newMessages.length > 0) {
+                    response.newMessages.forEach(msg => {
                         appendMessage('bot', msg);
                     });
                 }
@@ -92,7 +95,7 @@
         });
 
         // Start polling for bot responses
-         setInterval(pollBotResponses, 2000);
+         setInterval(pollBotResponses, 10000);
     });
 </script>
 {% endblock %}

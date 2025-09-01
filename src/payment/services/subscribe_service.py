@@ -1,6 +1,7 @@
 import datetime
 
 from django.contrib.auth.models import User
+from django.urls import reverse_lazy
 
 from src.payment.models import Subscription, Package
 from . import StripeService
@@ -11,13 +12,15 @@ class SubscribeService:
         subscription: Subscription = Subscription.objects.filter(user=user).first()
 
         if subscription is None:
-            Subscription.objects.create(user=user, package=package)
+            subscription = Subscription.objects.create(user=user, package=package)
 
         subscription.active_until = None
         subscription.save()
 
         package: Package = Package.objects.filter(name=package).first()
 
+        return reverse_lazy('payment_success_url')
+        # TODO implement Stripe
         stripe_service: StripeService = StripeService()
         return stripe_service.create_checkout_session(package.price, package.name)
 
